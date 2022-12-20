@@ -14,8 +14,10 @@ class Enemy:
         self.speed = speed
 
     def take_damage(self, amount, encounter):
-        self.health -= amount
-        print(f"{self.name} just took {amount} damage!")
+        enemy_defense_mult = 1 - (self.defense/100)
+        actual_damage = amount * enemy_defense_mult
+        self.health -= amount * enemy_defense_mult
+        print(f"{self.name} just took {actual_damage} damage!")
         encounter.health_var.set(self.health)
 
     def hostile_deal_damage(self, amount):

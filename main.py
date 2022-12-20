@@ -102,8 +102,8 @@ class BattleEncounter(tk.Tk):
     inventory.add_item(item5)
 
     # Add a lot of potions
-    for _ in range(0, 2):
-        inventory.add_item(item1)
+    for _ in range(0, 7):
+        inventory.add_item(item5)
 
     def attack(self):
         # Open a new window for the attack action if it is not already open
@@ -202,7 +202,7 @@ class BattleEncounter(tk.Tk):
 
 if __name__ == "__main__":
     # Create an instance of the Enemy class
-    enemy = Enemy("Goblin", "enemy.png", 100, 50, 20, 30, 70)
+    enemy = Enemy("Goblin", "enemy.png", 100, 50, 15, 30, 70)
 
     # Create an instance of the BattleEncounter class and pass the enemy instance
     app = BattleEncounter(enemy)
