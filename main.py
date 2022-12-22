@@ -185,8 +185,9 @@ class BattleEncounter(tk.Tk):
                     # TODO make it so that it uses ALL the functions of the item instead of just "Eat/drink the item"
                     # TODO make it so that the current item's results can take a varying number of arguments (*kwargs, args, **kwargs, etc)
                     # use_button.config(command=lambda: [currentitem.results[0](currentitem, self.inventory), self.item_window.destroy(), self.item()])
+                    args_dict = {"enemy": myenemy, "inventory": self.inventory, "encounter": app}
                     use_button.config(
-                        command=lambda: [currentitem.results[0](currentitem, enemy, self.inventory, app), self.item_window.destroy(),
+                        command=lambda: [currentitem.call_all(currentitem, myenemy, self.inventory, app), self.item_window.destroy(),
                                          self.item()])
                     item_label1.config(
                         text=f"I. NAME\n{currentitem.name}\n\nII. DESCRIPTION\n{currentitem.description}\n\nIII. EFFECTS\n{currentitem.effect}\n\nIV. TYPE OF ITEM\n{currentitem.itemtype}")
@@ -202,8 +203,8 @@ class BattleEncounter(tk.Tk):
 
 if __name__ == "__main__":
     # Create an instance of the Enemy class
-    enemy = Enemy("Goblin", "enemy.png", 100, 50, 15, 30, 70)
+    myenemy = Enemy("Goblin", "enemy.png", 100, 50, 15, 30, 70)
 
     # Create an instance of the BattleEncounter class and pass the enemy instance
-    app = BattleEncounter(enemy)
+    app = BattleEncounter(myenemy)
     app.mainloop()
