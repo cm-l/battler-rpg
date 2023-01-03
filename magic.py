@@ -7,11 +7,13 @@ def magic_contents(self):
     self.magic_window = tk.Toplevel(self)
     self.magic_window.title("Magic")
     self.magic_window.geometry("300x240")
-    self.magic_window.config(cursor='target')
     tk.Label(self.magic_window, text="Choose a spell to cast")
 
     # Slot frame
     slots_frame = tk.Frame(self.magic_window)
+
+    # Spoken phrase
+    spoken_dictionary = {"slot1": "", "slot2": "", "slot3": "", "slot4": ""}
 
     # Create the three empty slots
     slot1 = tk.Button(slots_frame, text="1st Phrase")
@@ -45,19 +47,18 @@ def magic_contents(self):
         spell4
     ]
 
-    casted_result0 = CastedResult("Instant Death", "Kind of self-explainatory.", "I think you can guess.", "moxglubolpumox")
-    casted_result1 = CastedResult("Fishification", "Low, yet worrisome risk of misfiring into the caster", "Turns the target into a fish", "glubglubglubglub")
+    casted_result0 = CastedResult("Instant Death", "Kind of self-explainatory.", "I think you can guess.",
+                                  "moxglubolpumox")
+    casted_result1 = CastedResult("Fishification", "Low, yet worrisome risk of misfiring into the caster",
+                                  "Turns the target into a fish", "glubglubglubglub")
 
     casted_results = [
         casted_result0,
         casted_result1
     ]
 
-    # Spoken phrase
-    spoken_dictionary = {"slot1": "", "slot2": "", "slot3": "", "slot4": ""}
-
-    # Load image
-    icon = tk.PhotoImage(file=r"icons\Icon1.png")
+    # Enabling castability status
+    slot5.config(state="disabled")
 
     def pick_spell(slot):
         # Create the new window
@@ -91,12 +92,20 @@ def magic_contents(self):
             # Add phrase to spoken spell
             spoken_dictionary[slot] = selected_spell.phrase
 
+            try:
+                if spoken_dictionary[slot1] != "" and spoken_dictionary[slot2] != "" and spoken_dictionary[slot3] != "" and spoken_dictionary[slot4] != "":
+                    slot5.config(state="normal")
+                    print("Castable spell!")
+            except:
+                print("Not a castable word.")
+
             # Close the window
             spell_window.destroy()
 
     def speak():
         final_phrase = ""
-        final_phrase = spoken_dictionary[slot1] + spoken_dictionary[slot2] + spoken_dictionary[slot3] + spoken_dictionary[slot4]
+        final_phrase = spoken_dictionary[slot1] + spoken_dictionary[slot2] + spoken_dictionary[slot3] + \
+                       spoken_dictionary[slot4]
         print(f"Watch out, here's a spell! {final_phrase.capitalize()}!!!")
 
         for i in range(0, len(casted_results)):
@@ -111,8 +120,6 @@ def magic_contents(self):
 
         # Close magic window
         self.magic_window.destroy()
-
-
 
     # Set the command for the three slots to open the spell selection window
     slot1['command'] = lambda: pick_spell(slot1)
