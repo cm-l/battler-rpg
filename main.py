@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
+from playsound import playsound
 
 from enemy import *
 from item import *
@@ -187,7 +188,8 @@ class BattleEncounter(tk.Tk):
                     # use_button.config(command=lambda: [currentitem.results[0](currentitem, self.inventory), self.item_window.destroy(), self.item()])
                     args_dict = {"enemy": myenemy, "inventory": self.inventory, "encounter": app}
                     use_button.config(
-                        command=lambda: [currentitem.call_all(currentitem, myenemy, self.inventory, app), self.item_window.destroy(),
+                        command=lambda: [currentitem.call_all(currentitem, myenemy, self.inventory, app),
+                                         self.item_window.destroy(),
                                          self.item()])
                     item_label1.config(
                         text=f"I. NAME\n{currentitem.name}\n\nII. DESCRIPTION\n{currentitem.description}\n\nIII. EFFECTS\n{currentitem.effect}\n\nIV. TYPE OF ITEM\n{currentitem.itemtype}")

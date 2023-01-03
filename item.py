@@ -1,3 +1,6 @@
+from playsound import playsound
+
+
 class Item:
     def __init__(self, name, description, effect, itemtype, results):
         self.name = name
@@ -16,13 +19,13 @@ class Item:
         if self.itemtype == "Potion":
             empty_container = Item("Empty Bottle",
                                    "This used to hold some sort of liquid. You either found this or drank something and were left with an empty container.",
-                                   "Can be refilled. Useful in alchemy and brewing.", "Rations Container",
+                                   "Can be refilled. Useful in alchemy and brewing. Thrown in combat.", "Rations Container",
                                    [Item.offensive_use, Item.print_test_line])
 
         elif self.itemtype == "Meal":
             empty_container = Item("Empty Meal Container",
                                    "This used to hold some sort of food. You either found this or ate something and were left with an empty container.",
-                                   "Can be refilled. Useful in cooking and food storage.", "Rations Container",
+                                   "Can be refilled. Useful in cooking and food storage. Thrown in combat.", "Rations Container",
                                    [Item.offensive_use])
         else:
             print("Why are you eating this?")
@@ -30,12 +33,13 @@ class Item:
                                    "The remains of a brave attempt at eating something that was clearly not meant to be eaten. Covered in your saliva. Off-putting to say the least.",
                                    "Nothing. This is gross. Throw it out as soon as you can.", "Trash",
                                    [Item.offensive_use])
+        playsound(r'sfx\potion.wav', False)
         inventory.add_item(empty_container)
         inventory.remove_item(self)
 
     def print_test_line(self, enemy, inventory, encounter):
-        print(f"Here's {self.name} calling!")
-        print(f"I'm over here at the player's inventory.")
+        print(f"Here's {self.name} calling! v")
+        print(f" ^ I'm over here at the player's inventory.")
 
     def call_all(self, *args):
         for i in range(0, len(self.results)):

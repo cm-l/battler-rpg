@@ -18,7 +18,9 @@ class Enemy:
         actual_damage = amount * enemy_defense_mult
         self.health -= amount * enemy_defense_mult
         print(f"{self.name} just took {actual_damage} damage!")
+        # Sound
         encounter.health_var.set(self.health)
+        playsound(r"sfx\enemyhurt.wav", False)
 
     def hostile_deal_damage(self, amount):
         print(f"{self.name} just hit you for {amount} damage!!!")
