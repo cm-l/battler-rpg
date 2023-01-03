@@ -1,3 +1,6 @@
+import tk
+
+from main import *
 from playsound import playsound
 
 
@@ -19,13 +22,15 @@ class Item:
         if self.itemtype == "Potion":
             empty_container = Item("Empty Bottle",
                                    "This used to hold some sort of liquid. You either found this or drank something and were left with an empty container.",
-                                   "Can be refilled. Useful in alchemy and brewing. Thrown in combat.", "Rations Container",
+                                   "Can be refilled. Useful in alchemy and brewing. Thrown in combat.",
+                                   "Rations Container",
                                    [Item.offensive_use, Item.print_test_line])
 
         elif self.itemtype == "Meal":
             empty_container = Item("Empty Meal Container",
                                    "This used to hold some sort of food. You either found this or ate something and were left with an empty container.",
-                                   "Can be refilled. Useful in cooking and food storage. Thrown in combat.", "Rations Container",
+                                   "Can be refilled. Useful in cooking and food storage. Thrown in combat.",
+                                   "Rations Container",
                                    [Item.offensive_use])
         else:
             print("Why are you eating this?")

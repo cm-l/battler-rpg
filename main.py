@@ -6,6 +6,8 @@ from playsound import playsound
 from enemy import *
 from item import *
 from inventory import *
+from item import Item
+from magic import *
 
 
 class BattleEncounter(tk.Tk):
@@ -135,10 +137,8 @@ class BattleEncounter(tk.Tk):
     def magic(self):
         # Open a new window for the magic action if it is not already open
         if not self.magic_window:
-            self.magic_window = tk.Toplevel(self)
-            self.magic_window.title("Magic")
-            self.magic_window.geometry("300x300")
-            tk.Label(self.magic_window, text="Choose a spell to cast").pack()
+            # From separate file
+            magic_contents(self)
 
             # Bind the <Destroy> event to the window and set the class variable to None in the event handler
             self.magic_window.bind("<Destroy>", lambda event: setattr(self, "magic_window", None))
